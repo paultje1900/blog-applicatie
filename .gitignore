@@ -1,6 +1,10 @@
-vendor/
+/vendor/
 .env
+
 .idea/
 .vscode/
-*.log
-cache/
+*.swp
+*.swo
+
+.DS_Store
+Thumbs.db
