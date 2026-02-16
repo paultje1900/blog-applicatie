@@ -4,44 +4,28 @@ namespace App\Core;
 
 class Csrf
 {
-    private const TOKEN_KEY = '_csrf_token';
-
     public static function token(): string
     {
-        Session::start();
-
-        if (Session::has(self::TOKEN_KEY)) {
-            return Session::get(self::TOKEN_KEY);
+        if (!Session::get('_token')) {
+            Session::set('_token', bin2hex(random_bytes(32)));
         }
 
-        $token = bin2hex(random_bytes(32));
-
-        Session::set(self::TOKEN_KEY, $token);
-
-        return $token;
+        return Session::get('_token');
     }
 
-    public static function verify(?string $token): bool
+    public static function verify(): void
     {
-        Session::start();
-
-        $sessionToken = Session::get(self::TOKEN_KEY);
-
-        if ($sessionToken === null || $token === null) {
-            self::fail();
-        }
+        $token = trim($_POST['_token'] ?? '');
+        $sessionToken = trim(Session::get('_token') ?? '');
 
         if (!hash_equals($sessionToken, $token)) {
-            self::fail();
+            http_response_code(403);
+            die('CSRF token mismatch.');
         }
-
-        return true;
     }
 
-    private static function fail(): never
+    public static function field(): string
     {
-        http_response_code(403);
-        require __DIR__ . '/../../templates/errors/403.php';
-        exit;
+        return '<input type="hidden" name="_token" value="' . self::token() . '">';
     }
 }
