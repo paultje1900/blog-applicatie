@@ -44,17 +44,17 @@ class Session
         unset($_SESSION[$key]);
     }
 
-    public static function flash(string $key, string $message): void
+    public static function flash(string $key, mixed $value): void
     {
         self::start();
-        $_SESSION['_flash'][$key] = $message;
+        $_SESSION['_flash'][$key] = $value;
     }
 
-    public static function getFlash(string $key): ?string
+    public static function getFlash(string $key, mixed $default = null): mixed
     {
         self::start();
 
-        $message = $_SESSION['_flash'][$key] ?? null;
+        $value = $_SESSION['_flash'][$key] ?? $default;
 
         unset($_SESSION['_flash'][$key]);
 
@@ -62,13 +62,19 @@ class Session
             unset($_SESSION['_flash']);
         }
 
-        return $message;
+        return $value;
     }
 
     public static function hasFlash(string $key): bool
     {
         self::start();
         return isset($_SESSION['_flash'][$key]);
+    }
+
+    public static function regenerate(): void
+    {
+        self::start();
+        session_regenerate_id(true);
     }
 
     public static function setOld(array $data): void
