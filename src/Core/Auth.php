@@ -2,22 +2,31 @@
 
 namespace App\Core;
 
+use App\Models\UserModel;
+
 class Auth
 {
-    private static ?array $currentUser = null;
+    private static array|false|null $currentUser = null;
+
+    public static function register(string $username, string $email, string $password): string
+    {
+        $userId = UserModel::create([
+            'username' => $username,
+            'email'    => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+        ]);
+
+        Session::regenerate();
+        Session::set('user_id', $userId);
+
+        return $userId;
+    }
 
     public static function attempt(string $email, string $password): bool
     {
-        $user = Database::query(
-            "SELECT * FROM users WHERE email = ?",
-            [$email]
-        )->fetch();
+        $user = UserModel::findByEmail($email);
 
-        if (!$user) {
-            return false;
-        }
-
-        if (!password_verify($password, $user['password'])) {
+        if (!$user || !password_verify($password, $user['password'])) {
             return false;
         }
 
@@ -27,42 +36,24 @@ class Auth
         return true;
     }
 
-    public static function register(string $username, string $email, string $password): string
+    public static function logout(): void
     {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        Database::query(
-            "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-            [$username, $email, $hashedPassword]
-        );
-
-        $userId = Database::lastInsertId();
-
+        Session::remove('user_id');
         Session::regenerate();
-        Session::set('user_id', $userId);
-
-        return $userId;
+        self::$currentUser = null;
     }
 
-    public static function user(): ?array
+    public static function user(): array|false
     {
-        if (self::$currentUser !== null) {
-            return self::$currentUser;
-        }
+        if (self::$currentUser === null) {
+            $userId = Session::get('user_id');
 
-        $userId = Session::get('user_id');
-        if (!$userId) {
-            return null;
-        }
+            if (!$userId) {
+                self::$currentUser = false;
+                return false;
+            }
 
-        self::$currentUser = Database::query(
-            "SELECT id, username, email FROM users WHERE id = ?",
-            [$userId]
-        )->fetch();
-
-        if (!self::$currentUser) {
-            self::logout();
-            return null;
+            self::$currentUser = UserModel::findById($userId);
         }
 
         return self::$currentUser;
@@ -70,13 +61,11 @@ class Auth
 
     public static function check(): bool
     {
-        return self::user() !== null;
+        return self::user() !== false;
     }
 
-    public static function logout(): void
+    public static function guest(): bool
     {
-        Session::remove('user_id');
-        Session::regenerate();
-        self::$currentUser = null;
+        return !self::check();
     }
 }
