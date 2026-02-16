@@ -40,7 +40,7 @@ class Router
         $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
         $method = strtoupper($method);
 
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
 
         if ($uri !== '/') {
             $uri = rtrim($uri, '/');
