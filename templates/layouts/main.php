@@ -6,6 +6,8 @@
     <title>Blog - applicatie</title>
 </head>
 <body>
+    <?php include __DIR__ . '/../components/navbar.php'; ?>
+    <hr>
     <?= $content ?>
 </body>
 </html>
