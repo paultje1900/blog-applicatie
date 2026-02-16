@@ -10,6 +10,11 @@ function old(string $key, string $default = ''): string
     return \App\Core\Session::getOld($key, $default);
 }
 
+function csrfField(): string
+{
+    return '<input type="hidden" name="_token" value="' . \App\Core\Csrf::token() . '">';
+}
+
 function redirect(string $url, int $statuscode = 302): never
 {
     header("Location: {$url}", true, $statuscode);
