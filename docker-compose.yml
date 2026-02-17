@@ -30,7 +30,7 @@ services:
     tty: true
     volumes:
       - .:/var/www/html
-    command: sh -c "npm install && npx @tailwindcss/cli -i resources/css/app.css -o public/css/app.css --watch --poll"
+    command: sh -c "npm install && npx @tailwindcss/cli -i resources/css/app.css -o public/assets/css/app.css --watch --poll"
     networks:
       - blog-applicatie-network
 

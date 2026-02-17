@@ -17,7 +17,7 @@ class AuthController
             redirect('/');
         }
 
-        render('auth/login');
+        render('auth/login', [], 'auth');
     }
 
     public function registerForm(): void
@@ -26,7 +26,7 @@ class AuthController
             redirect('/');
         }
 
-        render('auth/register');
+        render('auth/register', [], 'auth');
     }
 
     public function login(): void

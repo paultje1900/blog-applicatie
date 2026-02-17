@@ -7,7 +7,7 @@
 *.swo
 
 node_modules/
-public/css/app.css
+public/assets/css/app.css
 
 .DS_Store
 Thumbs.db
