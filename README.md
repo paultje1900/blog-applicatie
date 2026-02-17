@@ -58,3 +58,6 @@ CSRF-tokens op alle formulieren, wachtwoorden gehasht met bcrypt en session rege
 
 ### Router & Middleware
 Eigen router met ondersteuning voor route parameters (`/posts/{id}`) en middleware. Auth en guest middleware beschermen routes zodat bijvoorbeeld alleen ingelogde gebruikers posts kunnen aanmaken.
+
+### Comments
+Oudste eerst om het meer te laten lijken op een chronologisch gesprek.
