@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\AuthController;
+use App\Controllers\CommentController;
 use App\Controllers\PostController;
 
 $router->get('/login',     [AuthController::class, 'loginForm'], ['guest']);
@@ -16,3 +17,6 @@ $router->get('/posts/{id}',          [PostController::class, 'show']);
 $router->get('/posts/{id}/edit',     [PostController::class, 'edit'],    ['auth']);
 $router->post('/posts/{id}',         [PostController::class, 'update'],  ['auth']);
 $router->post('/posts/{id}/delete',  [PostController::class, 'destroy'], ['auth']);
+
+$router->post('/posts/{postId}/comments',      [CommentController::class, 'store'],    ['auth']);
+$router->post('/api/posts/{postId}/comments',  [CommentController::class, 'storeApi'], ['auth']);

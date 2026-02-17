@@ -44,4 +44,64 @@
             <?= $post['body'] ?>
         </div>
     </article>
+
+     <section class="mt-10" id="comments">
+        <h2 class="text-2xl font-bold text-white mb-6">
+            Reacties (<?= count($comments) ?>)
+        </h2>
+
+        <!-- Bestaande reacties -->
+        <?php if (empty($comments)): ?>
+            <p class="text-gray-500 italic">Nog geen reacties. Wees de eerste!</p>
+        <?php else: ?>
+            <div id="comments-list" class="space-y-6">
+                <?php foreach ($comments as $comment): ?>
+                    <div class="py-4 border-b border-dark-600">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-gray-300 font-bold"><?= e($comment['username']) ?></span>
+                            <time class="text-sm text-gray-500" datetime="<?= $comment['created_at'] ?>">
+                                <?= date('j M Y \o\m H:i', strtotime($comment['created_at'])) ?>
+                            </time>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed"><?= nl2br(e($comment['body'])) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($user): ?>
+            <div class="mt-8" id="comment-form-wrapper">
+                <h3 class="text-lg font-medium text-white mb-4">Plaats een reactie</h3>
+
+                <div id="comment-errors" class="hidden mb-4 border-l-4 px-4 py-3 rounded-lg bg-red-500/10 border-red-500/30 text-red-400"></div>
+
+                <form id="comment-form" method="POST" action="/posts/<?= $post['id'] ?>/comments">
+                    <?= csrfField() ?>
+                    <div class="mb-4">
+                        <textarea
+                            name="body"
+                            id="comment-body"
+                            rows="4"
+                            placeholder="Schrijf je reactie..."
+                            class="w-full bg-dark-800 border border-dark-600 rounded-lg px-4 py-3 text-gray-300 placeholder-gray-500 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 transition-colors duration-200"
+                            required
+                        ><?= e(old('body')) ?></textarea>
+                    </div>
+                    <button type="submit"
+                            class="bg-accent-500 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-accent-600 transition-colors duration-200">
+                        Reageer
+                    </button>
+                </form>
+            </div>
+        <?php else: ?>
+            <div class="mt-8 p-6 text-center">
+                <p class="text-gray-400">
+                    <a href="/login" class="text-accent-400 hover:text-white transition-colors duration-200">Log in</a>
+                    om een reactie te plaatsen.
+                </p>
+            </div>
+        <?php endif; ?>
+    </section>
 </div>
+
+<script src="/assets/js/comments.js"></script>

@@ -6,6 +6,7 @@ use App\Core\Auth;
 use App\Core\Csrf;
 use App\Core\Session;
 use App\Core\Validator;
+use App\Models\CommentModel;
 use App\Models\PostModel;
 
 class PostController
@@ -63,8 +64,11 @@ class PostController
             return;
         }
 
+        $comments = CommentModel::findByPostId((int) $id);
+
         render('posts/show', [
             'post' => $post,
+            'comments' => $comments,
             'user' => Auth::user(),
         ]);
     }
