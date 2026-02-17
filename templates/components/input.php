@@ -2,12 +2,12 @@
 /**
  * @param string $name
  * @param string $label
- * @param string $type        (default: 'text')
- * @param string $placeholder (default: '')
- * @param string $value       (default: '')
- * @param bool   $required    (default: true)
- * @param array  $errors      (default: [])
- * @param bool   $password    (default: false) — toont oog-toggle
+ * @param string $type
+ * @param string $placeholder
+ * @param string $value
+ * @param bool   $required
+ * @param array  $errors
+ * @param bool   $password
  */
 $type        = $type ?? 'text';
 $placeholder = $placeholder ?? '';

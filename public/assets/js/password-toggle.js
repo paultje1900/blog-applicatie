@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-toggle-password]').forEach(button => {
         button.addEventListener('click', () => {
-            const input = document.getElementById(button.dataset.togglePassword);
+            const input = button.closest('.relative').querySelector('input');
             if (!input) return;
 
             const isHidden = input.type === 'password';

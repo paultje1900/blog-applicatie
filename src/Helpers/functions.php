@@ -34,6 +34,10 @@ function render(string $template, array $data = [], string $layout = 'app'): voi
 
 function component(string $name, array $data = []): void
 {
-    extract($data, EXTR_SKIP);
-    require __DIR__ . "/../../templates/components/{$name}.php";
+    $render = static function (string $__file, array $__data): void {
+        extract($__data, EXTR_SKIP);
+        require $__file;
+    };
+
+    $render(__DIR__ . "/../../templates/components/{$name}.php", $data);
 }

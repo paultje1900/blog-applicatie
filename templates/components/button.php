@@ -1,8 +1,8 @@
 <?php
 /**
  * @param string $text
- * @param string $variant (default: 'primary') — primary, secondary, danger
- * @param string $type    (default: 'submit')
+ * @param string $variant
+ * @param string $type
  */
 $variant = $variant ?? 'primary';
 $type    = $type ?? 'submit';
