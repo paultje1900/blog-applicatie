@@ -3,68 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>500 — Server Error</title>
+    <title>500 - Server Error</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            color: #333;
+            background: #0a0a0f;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #9ca3af;
         }
-
-        .error-page {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .error-code {
-            font-size: 6em;
+        .container { text-align: center; }
+        h1 {
+            font-size: 4rem;
             font-weight: bold;
-            color: #e74c3c;
-            line-height: 1;
+            color: #6366f1;
+            margin-bottom: 1rem;
         }
-
-        .error-title {
-            font-size: 1.5em;
-            margin: 20px 0 10px;
-            color: #333;
+        .message {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #9ca3af;
         }
-
-        .error-message {
-            color: #777;
-            margin-bottom: 30px;
-            max-width: 400px;
+        .sub {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
         }
-
-        .error-link {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 6px;
+        a {
+            color: #818cf8;
             text-decoration: none;
-            transition: background 0.2s;
+            transition: color 0.2s;
         }
-
-        .error-link:hover {
-            background: #2980b9;
-        }
+        a:hover { color: #a5b4fc; }
     </style>
 </head>
 <body>
-    <div class="error-page">
-        <div class="error-code">500</div>
-        <h1 class="error-title">Er is iets misgegaan</h1>
-        <p class="error-message">
-            Sorry, er is een onverwachte fout opgetreden.
-            Probeer het later opnieuw.
-        </p>
-        <a href="/" class="error-link">Terug naar home</a>
+    <div class="container">
+        <h1>500</h1>
+        <p class="message">Er ging iets mis</p>
+        <p class="sub">Er is een serverfout opgetreden. Probeer het later opnieuw.</p>
+        <a href="/">← Terug naar home</a>
     </div>
 </body>
 </html>

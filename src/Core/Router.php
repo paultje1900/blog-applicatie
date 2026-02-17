@@ -107,7 +107,7 @@ class Router
     private function notFound(): void
     {
         http_response_code(404);
-        require __DIR__ . '/../../templates/errors/404.php';
+        render('errors/404', ['user' => \App\Core\Auth::user()]);
         exit;
     }
 }

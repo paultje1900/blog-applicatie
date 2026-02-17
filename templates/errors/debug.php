@@ -8,8 +8,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1a1a2e;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0f;
             color: #e0e0e0;
             line-height: 1.6;
         }
@@ -20,9 +20,8 @@
             padding: 0 20px;
         }
 
-        /* De rode error header */
         .error-header {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             border-radius: 12px 12px 0 0;
             padding: 30px;
         }
@@ -39,11 +38,10 @@
             font-family: monospace;
         }
 
-        /* Secties */
         .error-section {
-            background: #16213e;
+            background: #111119;
             padding: 25px 30px;
-            border-bottom: 1px solid #1a1a2e;
+            border-bottom: 1px solid #1e1e2e;
         }
 
         .error-section:last-child {
@@ -54,37 +52,34 @@
             font-size: 0.85em;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #e74c3c;
+            color: #6366f1;
             margin-bottom: 15px;
         }
 
-        /* Bestandspad en regelnummer */
         .file-info {
             font-family: 'Fira Code', 'Consolas', monospace;
             font-size: 0.95em;
-            color: #82aaff;
+            color: #818cf8;
         }
 
         .file-info .line-number {
-            color: #e74c3c;
+            color: #ef4444;
             font-weight: bold;
         }
 
-        /* Stack trace */
         .stack-trace {
             font-family: 'Fira Code', 'Consolas', monospace;
             font-size: 0.8em;
-            background: #0f0f23;
+            background: #08080d;
             padding: 20px;
             border-radius: 8px;
             overflow-x: auto;
             white-space: pre-wrap;
             word-break: break-word;
-            color: #a0a0a0;
+            color: #9ca3af;
             line-height: 1.8;
         }
 
-        /* Request info */
         .info-grid {
             display: grid;
             grid-template-columns: 140px 1fr;
@@ -92,22 +87,21 @@
         }
 
         .info-label {
-            color: #888;
+            color: #6b7280;
             font-size: 0.85em;
         }
 
         .info-value {
             font-family: monospace;
-            color: #82aaff;
+            color: #818cf8;
             font-size: 0.9em;
         }
 
-        /* Tip onderaan */
         .error-tip {
-            background: #1a1a2e;
+            background: #0a0a0f;
             padding: 15px 30px;
             font-size: 0.8em;
-            color: #666;
+            color: #4b5563;
             border-radius: 0 0 12px 12px;
             text-align: center;
         }
@@ -115,7 +109,6 @@
 </head>
 <body>
     <div class="error-container">
-
         <div class="error-header">
             <span class="error-class"><?= e($class) ?></span>
             <h1><?= e($message) ?></h1>
@@ -132,10 +125,10 @@
             <h2>Request</h2>
             <div class="info-grid">
                 <span class="info-label">Method</span>
-                <span class="info-value"><?= htmlspecialchars($method) ?></span>
+                <span class="info-value"><?= e($method) ?></span>
 
                 <span class="info-label">URI</span>
-                <span class="info-value"><?= htmlspecialchars($uri) ?></span>
+                <span class="info-value"><?= e($uri) ?></span>
 
                 <span class="info-label">Tijd</span>
                 <span class="info-value"><?= date('Y-m-d H:i:s') ?></span>
@@ -147,7 +140,11 @@
 
         <div class="error-section">
             <h2>Stack Trace</h2>
-            <div class="stack-trace"><?= htmlspecialchars($trace) ?></div>
+            <div class="stack-trace"><?= e($trace) ?></div>
+        </div>
+
+        <div class="error-tip">
+            Deze pagina is alleen zichtbaar in development modus.
         </div>
     </div>
 </body>
