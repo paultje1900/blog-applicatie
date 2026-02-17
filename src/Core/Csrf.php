@@ -20,7 +20,8 @@ class Csrf
 
         if (!hash_equals($sessionToken, $token)) {
             http_response_code(403);
-            die('CSRF token mismatch.');
+            render('errors/403');
+            exit;
         }
     }
 

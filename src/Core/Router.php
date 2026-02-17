@@ -107,7 +107,7 @@ class Router
     private function notFound(): void
     {
         http_response_code(404);
-        render('errors/404', ['user' => \App\Core\Auth::user()]);
+        render('errors/404');
         exit;
     }
 }
