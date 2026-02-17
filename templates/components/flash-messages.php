@@ -6,9 +6,8 @@ $types = [
 ];
 
 foreach ($types as $type => $classes):
-    $message = \App\Core\Session::get($type);
+    $message = \App\Core\Session::getFlash($type);
     if ($message):
-        \App\Core\Session::delete($type);
 ?>
     <div class="container mx-auto px-6 mt-4">
         <div class="border-l-4 px-4 py-3 rounded-lg <?= $classes ?>">
