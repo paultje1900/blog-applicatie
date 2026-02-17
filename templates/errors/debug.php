@@ -117,14 +117,14 @@
     <div class="error-container">
 
         <div class="error-header">
-            <span class="error-class"><?= htmlspecialchars($class) ?></span>
-            <h1><?= htmlspecialchars($message) ?></h1>
+            <span class="error-class"><?= e($class) ?></span>
+            <h1><?= e($message) ?></h1>
         </div>
 
         <div class="error-section">
             <h2>Locatie</h2>
             <p class="file-info">
-                <?= htmlspecialchars($file) ?>:<span class="line-number"><?= $line ?></span>
+                <?= e($file) ?>:<span class="line-number"><?= $line ?></span>
             </p>
         </div>
 

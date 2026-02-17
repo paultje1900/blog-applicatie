@@ -21,7 +21,7 @@ function redirect(string $url, int $statuscode = 302): never
     exit;
 }
 
-function render(string $template, array $data = [], string $layout = 'main'): void
+function render(string $template, array $data = [], string $layout = 'app'): void
 {
     extract($data, EXTR_SKIP);
 

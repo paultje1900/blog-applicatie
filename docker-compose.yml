@@ -24,6 +24,16 @@ services:
     depends_on:
       - php
 
+  node:
+    image: node:20-alpine
+    working_dir: /var/www/html
+    tty: true
+    volumes:
+      - .:/var/www/html
+    command: sh -c "npm install && npx @tailwindcss/cli -i resources/css/app.css -o public/css/app.css --watch --poll"
+    networks:
+      - blog-applicatie-network
+
   mysql:
     image: mysql:8.0
     restart: unless-stopped
